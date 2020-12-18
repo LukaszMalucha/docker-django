@@ -11,10 +11,7 @@ RUN pip install Pillow
 RUN pip install -r /requirements.txt
 RUN apk del .tmp-build-deps
 
-RUN mkdir /app
-WORKDIR /app
-COPY ./app/ /app
+WORKDIR /usr/app
+COPY . .
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-
