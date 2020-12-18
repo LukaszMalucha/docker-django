@@ -12,7 +12,12 @@ environ.Env.read_env()
 
 
 DEBUG = env("DEBUG")
-SECRET_KEY = env("SECRET_KEY")
+
+if "SECRET_KEY" in os.environ:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+else:
+    SECRET_KEY = "TestDjango"
+
 
 
 ALLOWED_HOSTS = ['*']
