@@ -12,6 +12,7 @@ environ.Env.read_env()
 
 if "SECRET_KEY" in os.environ:
     SECRET_KEY = os.environ.get('SECRET_KEY')
+
 else:
     SECRET_KEY = "TestDjango"
 
@@ -137,7 +138,7 @@ REST_FRAMEWORK = {
 
 
 
-if not DEBUG:
+if not DEBUG and "SECRET_KEY" in os.environ:
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
