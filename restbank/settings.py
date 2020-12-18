@@ -10,10 +10,14 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 
+if os.getenv('BUILD_ON_TRAVIS', None):
+    SECRET_KEY = "TestDjango"
+else:
+    SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG")
 
-SECRET_KEY = env("SECRET_KEY")
+
 
 
 ALLOWED_HOSTS = ['*']
