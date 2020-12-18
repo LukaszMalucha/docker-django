@@ -10,10 +10,10 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 
-if not env("SECRET_KEY"):
-    SECRET_KEY = "TestDjango"
+if "SECRET_KEY" in os.environ:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 else:
-    SECRET_KEY = env("SECRET_KEY")
+    SECRET_KEY = "TestDjango"
 
 DEBUG = env("DEBUG")
 
