@@ -10,7 +10,7 @@ env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env()
 
 
-if 'BUILD_ON_TRAVIS' in os.environ:
+if not env("SECRET_KEY"):
     SECRET_KEY = "TestDjango"
 else:
     SECRET_KEY = env("SECRET_KEY")
