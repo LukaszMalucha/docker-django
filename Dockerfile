@@ -1,17 +1,13 @@
-FROM python:3.7-alpine
+FROM python:3.7.6-buster
 
 COPY ./requirements.txt /requirements.txt
-RUN apk add --update --no-cache postgresql-client
-RUN apk add --update --no-cache --virtual .tmp-build-deps \
-        gcc libc-dev linux-headers postgresql-dev
-RUN apk add jpeg-dev zlib-dev libjpeg
-RUN pip install Pillow
-
-
 RUN pip install -r /requirements.txt
-RUN apk del .tmp-build-deps
 
-WORKDIR /usr/app
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+
+
 COPY . .
 EXPOSE 8000
 
