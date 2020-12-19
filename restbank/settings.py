@@ -16,6 +16,8 @@ if "SECRET_KEY" in os.environ:
 else:
     SECRET_KEY = "TestDjango"
 
+
+
 DEBUG = env("DEBUG")
 
 
@@ -111,12 +113,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
+
 
 # - PGUSER = postgres
 # - PGHOST = postgres
@@ -124,16 +121,25 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # - PGPASSWORD = postgres_password
 # - PGPORT = 5432
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres_password",
-        "HOST": "postgres",
-        "PORT": 5432,
+
+if "SECRET_KEY" in os.environ:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "postgres",
+            "USER": "postgres",
+            "PASSWORD": "postgres_password",
+            "HOST": "postgres",
+            "PORT": 5432,
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
 
 
 REST_FRAMEWORK = {
