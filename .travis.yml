@@ -12,16 +12,7 @@ before_install:
 script:
   - docker run lukaszmalucha/docker-django python manage.py test
 
-deploy:
-    provider: elasticbeanstalk
-    region: "us-east-1"
-    app: "docker-django"
-    env: "DockerDjango-env"
-    bucket_name: "elasticbeanstalk-us-east-1-872448488156"
-    bucket_path: "docker-django"
-    on:
-      branch: master
-    access_key_id: "$AWS_ACCESS_KEY_ID"
-    secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-
+  - docker push lukaszmalucha/docker-django
