@@ -12,5 +12,7 @@ before_install:
 script:
   - docker run lukaszmalucha/docker-django python manage.py test
 
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-
+  - docker push lukaszmalucha/docker-django
